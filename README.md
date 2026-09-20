@@ -1,5 +1,3 @@
-# Software Engineering Project Starter Code
+# Software Engineering Project
 
-This repo will start you off with an initial configuration that you'll modify as part of Checkpoint 1. As part of the modifications, you'll eventually delete the contents of this README and replace it with documentation for your project.
-
-Update for PR creation for checkpoint work
+The system computes the sum of all prime numbers less than or equal to the input integer. For example, an input of 10 includes the prime numbers 2, 3, 5, & 7, which results in an output of 17.
