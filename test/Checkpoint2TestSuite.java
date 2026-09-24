@@ -99,6 +99,5 @@ public class Checkpoint2TestSuite {
 			throw new IllegalStateException(errors.toString());
 		}
 	}
-
 	
 }
