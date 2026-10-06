@@ -2,10 +2,10 @@ package apis;
 
 import project.annotations.ConceptualAPIPrototype;
 
-public class PrototypeComputeConceptualAPI {
+public class PrototypeComputerConceptualAPI {
 	
 	@ConceptualAPIPrototype
-	public void prototype(ComputeConceptualAPI api) {
+	public void prototype(ComputerAPI api) {
 		
 		// compute data
 		ComputerResponse response = api.compute(new ComputerRequest());
