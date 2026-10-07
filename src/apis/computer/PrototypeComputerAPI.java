@@ -1,8 +1,8 @@
-package apis;
+package apis.computer;
 
 import project.annotations.ConceptualAPIPrototype;
 
-public class PrototypeComputerConceptualAPI {
+public class PrototypeComputerAPI {
 	
 	@ConceptualAPIPrototype
 	public void prototype(ComputerAPI api) {

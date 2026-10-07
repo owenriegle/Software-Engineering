@@ -1,4 +1,4 @@
-package apis;
+package apis.datastorage;
 
 import project.annotations.ProcessAPIPrototype;
 

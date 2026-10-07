@@ -1,9 +1,9 @@
-package apis;
+package apis.computer;
 
 import java.util.List;
 
 public class ComputerRequest {
 
-    List<Integer> data;
+    public List<Integer> data;
 
 }

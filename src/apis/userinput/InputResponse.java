@@ -1,4 +1,4 @@
-package apis;
+package apis.userinput;
 
 import java.util.List;
 

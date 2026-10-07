@@ -1,4 +1,4 @@
-package apis;
+package apis.datastorage;
 
 public enum WriteResponseCode {
 
