@@ -1,8 +1,11 @@
-import apis.DataStorageAPI;
-import apis.ReadRequest;
-import apis.ReadResponse;
-import apis.WriteRequest;
-import apis.WriteResponse;
+import java.util.List;
+
+import apis.datastorage.DataStorageAPI;
+import apis.datastorage.ReadRequest;
+import apis.datastorage.ReadResponse;
+import apis.datastorage.WriteRequest;
+import apis.datastorage.WriteResponse;
+import apis.datastorage.WriteResponseCode;
 
 public class TestDataStorageApiImplementation implements DataStorageAPI {
 
@@ -16,18 +19,22 @@ public class TestDataStorageApiImplementation implements DataStorageAPI {
 
     @Override
     public ReadResponse read(ReadRequest request) {
-        
-        ReadResponse response = new ReadResponse();
-        response.setData(inputConfig.getInput());
-        return response;
 
+        ReadResponseImplementation response = new ReadResponseImplementation();
+
+        List<Integer> inputValues = inputConfig.getInput();
+        response.getData().addAll(inputValues);
+
+        return response;
     }
 
     @Override
     public WriteResponse write(WriteRequest request) {
 
-        WriteResponse response = new WriteResponse();
+        for (Integer value : request.results) {
+            outputConfig.getOutput().add(value.toString());
+        }
 
+        return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
     }
-    
 }
