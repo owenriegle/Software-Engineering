@@ -2,10 +2,10 @@ package apis;
 
 import project.annotations.NetworkAPIPrototype;
 
-public class PrototypeUserComputerEngineAPI {
+public class PrototypeUserInputAPI {
 	
 	@NetworkAPIPrototype
-	public void prototype(UserComputerEngineAPI api) {
+	public void prototype(UserInputAPI api) {
 		
 		// user specifies integer input
 		// user specifies output delimiters, with default options

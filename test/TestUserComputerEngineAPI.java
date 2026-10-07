@@ -6,7 +6,7 @@ import apis.ComputerAPI;
 import apis.DataStorageAPI;
 import apis.InputRequest;
 import apis.InputResponse;
-import apis.UserComputerEngineAPI;
+import apis.UserInputAPI;
 
 public class TestUserComputerEngineAPI {
 
@@ -15,7 +15,7 @@ public class TestUserComputerEngineAPI {
 
         DataStorageAPI storage = Mockito.mock(DataStorageAPI.class);
         ComputerAPI computer = Mockito.mock(ComputerAPI.class);
-        UserComputerEngineAPI api = new UserComputerEngineApiImplementation(storage, computer);
+        UserInputAPI api = new UserComputerEngineApiImplementation(storage, computer);
 
         InputRequest request = new InputRequest();
 
