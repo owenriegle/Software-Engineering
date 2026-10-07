@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.DataStorageAPI;
-import apis.ReadRequest;
-import apis.ReadResponse;
-import apis.WriteRequest;
-import apis.WriteResponse;
+import apis.datastorage.DataStorageAPI;
+import apis.datastorage.ReadRequest;
+import apis.datastorage.ReadResponse;
+import apis.datastorage.WriteRequest;
+import apis.datastorage.WriteResponse;
 
 public class TestDataStorageAPI {
     

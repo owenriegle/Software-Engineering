@@ -2,10 +2,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.ComputerAPI;
-import apis.ComputerRequest;
-import apis.ComputerResponse;
-import apis.DataStorageAPI;
+import apis.computer.ComputerAPI;
+import apis.computer.ComputerRequest;
+import apis.computer.ComputerResponse;
+import apis.datastorage.DataStorageAPI;
 
 public class TestComputerAPI {
 

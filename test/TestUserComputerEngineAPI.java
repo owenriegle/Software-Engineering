@@ -2,11 +2,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.ComputerAPI;
-import apis.DataStorageAPI;
-import apis.InputRequest;
-import apis.InputResponse;
-import apis.UserInputAPI;
+import apis.computer.ComputerAPI;
+import apis.datastorage.DataStorageAPI;
+import apis.userinput.InputRequest;
+import apis.userinput.InputResponse;
+import apis.userinput.UserInputAPI;
 
 public class TestUserComputerEngineAPI {
 
