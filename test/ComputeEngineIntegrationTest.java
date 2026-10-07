@@ -33,8 +33,8 @@ public class ComputeEngineIntegrationTest {
         InputRequest request = new InputRequest();
         jobHandler.handleJob(request);
 
-        // output should be empty because implementations all return null
-        assertTrue(output.isEmpty());
+        // assert output
+        assertEquals(List.of("0", "17", "100"), output);
         
     }
     
