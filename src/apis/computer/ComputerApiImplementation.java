@@ -1,4 +1,6 @@
-package apis;
+package apis.computer;
+
+import apis.datastorage.DataStorageAPI;
 
 public class ComputerApiImplementation implements ComputerAPI {
 

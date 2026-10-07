@@ -1,11 +1,14 @@
-package apis;
+package apis.userinput;
 
-public class UserComputerEngineAPIImplementation implements UserComputerEngineAPI {
+import apis.computer.ComputerAPI;
+import apis.datastorage.DataStorageAPI;
+
+public class UserInputApiImplementation implements UserInputAPI {
 
     private final DataStorageAPI dataStorageAPI;
     private final ComputerAPI computerAPI;
 
-    public UserComputerEngineAPIImplementation(DataStorageAPI dataStorageAPI, ComputerAPI computerAPI) {
+    public UserInputApiImplementation(DataStorageAPI dataStorageAPI, ComputerAPI computerAPI) {
         this.dataStorageAPI = dataStorageAPI;
         this.computerAPI = computerAPI;
     }
