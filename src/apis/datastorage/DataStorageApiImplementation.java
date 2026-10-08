@@ -4,12 +4,12 @@ public class DataStorageApiImplementation implements DataStorageAPI {
 
     @Override
     public WriteResponse write(WriteRequest request) {
-        return null;
+        return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
     }
 
     @Override
     public ReadResponse read(ReadRequest request) {
-        return null;
+        return new ReadResponseImplementation();
     }
 
 }
