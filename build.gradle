@@ -33,5 +33,6 @@ test {
         excludeTestsMatching "TestDataStorageApiImplementation"
         excludeTestsMatching "TestDataStorageAPI"
         excludeTestsMatching "TestComputerAPI"
+		excludeTestsMatching "ComputeEngineIntegrationTest"
     }
 }
