@@ -1,12 +1,13 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import apis.JobHandler;
+import apis.computer.ComputerApiImplementation;
 import apis.userinput.InputRequest;
+import apis.userinput.UserInputApiImplementation;
 
 public class ComputeEngineIntegrationTest {
 
@@ -26,10 +27,11 @@ public class ComputeEngineIntegrationTest {
 
         // instantiate api implementations
         TestDataStorageApiImplementation dataStorageImpl = new TestDataStorageApiImplementation(inputConfig, outputConfig);
-        ComputerApiImplementation computer = new ComputerApiImplementation(dataStorageImpl);
+        ComputerApiImplementation computerImpl = new ComputerApiImplementation(dataStorageImpl);
+        UserInputApiImplementation inputImpl = new UserInputApiImplementation(dataStorageImpl, computerImpl);
 
         // instantiate jobHandler and inputRequest to process user input
-        JobHandler jobHandler = new JobHandler(dataStorageImpl, computer);
+        JobHandler jobHandler = new JobHandler(computerImpl, dataStorageImpl, inputImpl);
         InputRequest request = new InputRequest();
         jobHandler.handleJob(request);
 

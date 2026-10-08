@@ -1,5 +1,7 @@
 package apis.computer;
 
+import java.util.ArrayList;
+
 import apis.datastorage.DataStorageAPI;
 
 public class ComputerApiImplementation implements ComputerAPI {
@@ -12,7 +14,7 @@ public class ComputerApiImplementation implements ComputerAPI {
 
     @Override
     public ComputerResponse compute(ComputerRequest computerRequest) {
-        return null;
+        return () -> new ArrayList<>();
     }
 
 }

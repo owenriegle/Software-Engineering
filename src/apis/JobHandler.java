@@ -11,16 +11,20 @@ import apis.datastorage.ReadResponse;
 import apis.datastorage.WriteRequest;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
+import apis.userinput.UserInputAPI;
 
 public class JobHandler {
 
-    private final DataStorageAPI storage;
-    private final ComputerAPI computer;
+    private final ComputerAPI computerAPI;
+    private final DataStorageAPI storageAPI;
+    private final UserInputAPI inputAPI;
 
-    public JobHandler(DataStorageAPI storage, ComputerAPI computer) {
+    public JobHandler(ComputerAPI computerAPI, DataStorageAPI storageAPI, UserInputAPI inputAPI) {
 
-        this.storage = storage;
-        this.computer = computer;
+        this.computerAPI = computerAPI;
+        this.storageAPI = storageAPI;
+        this.inputAPI = inputAPI;
+
     }
 
     public InputResponse handleJob(InputRequest request) {
@@ -30,12 +34,12 @@ public class JobHandler {
         readRequest.inputSource = request.inputSource;
 
         // read data from storage
-        ReadResponse readResponse = storage.read(readRequest);
+        ReadResponse readResponse = storageAPI.read(readRequest);
 
         // pass the data to the compute engine for processing
         ComputerRequest computerRequest = new ComputerRequest();
         computerRequest.data = readResponse.getData();
-        ComputerResponse computerResponse = computer.compute(computerRequest);
+        ComputerResponse computerResponse = computerAPI.compute(computerRequest);
 
         // write the results to the specified output destination
         WriteRequest writeRequest = new WriteRequest();
@@ -43,7 +47,7 @@ public class JobHandler {
         writeRequest.delimiter = request.delimiter;
         List<Integer> results = computerResponse.getResults();
         writeRequest.results = results;
-        storage.write(writeRequest);
+        storageAPI.write(writeRequest);
 
         // eventually add WriteResponse logic
         // return results to the user

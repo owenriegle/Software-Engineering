@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApiImplementation;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
 import apis.datastorage.WriteRequest;
@@ -19,7 +20,7 @@ public class TestDataStorageAPI {
 
         ReadResponse response = api.read(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
 
     }
 
@@ -32,7 +33,7 @@ public class TestDataStorageAPI {
 
         WriteResponse response = api.write(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
 
     }
 

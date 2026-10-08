@@ -22,7 +22,7 @@ public class TestUserInputAPI {
 
         InputResponse response = api.input(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
         
     }
     
