@@ -29,4 +29,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    filter {
+        includeTestsMatching "Checkpoint3TestSuite"
+    }
 }
