@@ -3,9 +3,11 @@ import java.util.List;
 import apis.datastorage.DataStorageAPI;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
+import apis.datastorage.ReadResponseImplementation;
 import apis.datastorage.WriteRequest;
 import apis.datastorage.WriteResponse;
 import apis.datastorage.WriteResponseCode;
+import apis.datastorage.WriteResponseImplementation;
 
 public class TestDataStorageApiImplementation implements DataStorageAPI {
 
