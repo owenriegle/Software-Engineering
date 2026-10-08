@@ -20,7 +20,7 @@ public class TestDataStorageAPI {
 
         ReadResponse response = api.read(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
 
     }
 
@@ -33,7 +33,7 @@ public class TestDataStorageAPI {
 
         WriteResponse response = api.write(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
 
     }
 

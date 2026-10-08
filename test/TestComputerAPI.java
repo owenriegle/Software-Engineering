@@ -20,7 +20,7 @@ public class TestComputerAPI {
 
         ComputerResponse response = api.compute(request);
 
-        Assertions.assertNull(response);
+        Assertions.assertNotNull(response);
         
     }
 
