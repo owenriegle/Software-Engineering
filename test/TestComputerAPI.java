@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import apis.computer.ComputerAPI;
+import apis.computer.ComputerApiImplementation;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
 import apis.datastorage.DataStorageAPI;
@@ -13,7 +14,7 @@ public class TestComputerAPI {
     void testCompute() {
 
         DataStorageAPI storage = Mockito.mock(DataStorageAPI.class);
-        ComputerAPI api = new ComputerpApiImplementation(storage);
+        ComputerAPI api = new ComputerApiImplementation(storage);
 
         ComputerRequest request = Mockito.mock(ComputerRequest.class);
 
