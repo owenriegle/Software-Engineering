@@ -29,10 +29,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    filter {
-        excludeTestsMatching "TestDataStorageApiImplementation"
-        excludeTestsMatching "TestDataStorageAPI"
-        excludeTestsMatching "TestComputerAPI"
-		excludeTestsMatching "ComputeEngineIntegrationTest"
-    }
 }
