@@ -4,16 +4,16 @@ apply plugin: 'eclipse'
 eclipse.project.name = 'Software-Engineering-' 
 
 sourceSets {
-	main {
-	  java {
-		srcDirs = ['src']
-	  }
-	}
-	test {
-	  java {
-	     srcDirs = ['test']
-	  }
-	 }
+    main {
+      java {
+        srcDirs = ['src']
+      }
+    }
+    test {
+      java {
+         srcDirs = ['test']
+      }
+     }
 }
 
 repositories {
@@ -21,16 +21,19 @@ repositories {
 }
 
 dependencies {
+  testImplementation('net.bytebuddy:byte-buddy:1.17.7')
+  testImplementation('net.bytebuddy:byte-buddy-agent:1.17.7')
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
-	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
-	testImplementation('org.mockito:mockito-core:5.10.0')
-	testImplementation ('fr.inria.gforge.spoon:spoon-core:11.0.0')
-	implementation('com.google.code.gson:gson:2.13.1')
+    testRuntimeOnly('org.junit.platform:junit-platform-engine:1.10.2')
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher:1.10.2')
+    testImplementation('org.mockito:mockito-core:5.14.2')
+    testImplementation('org.mockito:mockito-junit-jupiter:5.14.2')
+    testImplementation('fr.inria.gforge.spoon:spoon-core:11.0.0')
+    implementation('com.google.code.gson:gson:2.13.1')
+    testRuntimeOnly('org.slf4j:slf4j-simple:2.0.13') 
 }
+
 
 test {
     useJUnitPlatform()
-    filter {
-        includeTestsMatching "Checkpoint3TestSuite"
-    }
 }
