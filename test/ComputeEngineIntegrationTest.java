@@ -27,7 +27,7 @@ public class ComputeEngineIntegrationTest {
 
         // instantiate api implementations
         TestDataStorageApiImplementation dataStorageImpl = new TestDataStorageApiImplementation(inputConfig, outputConfig);
-        ComputerApiImplementation computerImpl = new ComputerApiImplementation(dataStorageImpl);
+        ComputerApiImplementation computerImpl = new ComputerApiImplementation();
         UserInputApiImplementation inputImpl = new UserInputApiImplementation(dataStorageImpl, computerImpl);
 
         // instantiate jobHandler and inputRequest to process user input
