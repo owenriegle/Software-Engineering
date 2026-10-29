@@ -1,9 +1,9 @@
 package apis.datastorage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface ReadResponse {
 
-    List<Integer> getData();
+    ArrayList<Integer> getData();
 
 }
