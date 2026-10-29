@@ -1,11 +1,11 @@
 package apis.datastorage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class WriteRequest {
 
     public String outputDestination;
     public String delimiter;
-    public List<Integer> results;
+    public ArrayList<Integer> results;
 
 }

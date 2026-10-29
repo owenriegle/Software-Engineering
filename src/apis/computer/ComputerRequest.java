@@ -1,9 +1,9 @@
 package apis.computer;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ComputerRequest {
 
-    public List<Integer> data;
+    public ArrayList<Integer> data;
 
 }

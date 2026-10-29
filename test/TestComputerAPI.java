@@ -6,15 +6,13 @@ import apis.computer.ComputerAPI;
 import apis.computer.ComputerApiImplementation;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
-import apis.datastorage.DataStorageAPI;
 
 public class TestComputerAPI {
 
     @Test
     void testCompute() {
 
-        DataStorageAPI storage = Mockito.mock(DataStorageAPI.class);
-        ComputerAPI api = new ComputerApiImplementation(storage);
+        ComputerAPI api = new ComputerApiImplementation();
 
         ComputerRequest request = Mockito.mock(ComputerRequest.class);
 

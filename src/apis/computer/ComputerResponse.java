@@ -1,9 +1,9 @@
 package apis.computer;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface ComputerResponse {
 
-    List<Integer> getResults();
+    ArrayList<Integer> getResults();
 
 }

@@ -1,6 +1,6 @@
 package apis;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import apis.computer.ComputerAPI;
 import apis.computer.ComputerRequest;
@@ -45,7 +45,7 @@ public class JobHandler {
         WriteRequest writeRequest = new WriteRequest();
         writeRequest.outputDestination = request.outputDestination;
         writeRequest.delimiter = request.delimiter;
-        List<Integer> results = computerResponse.getResults();
+        ArrayList<Integer> results = computerResponse.getResults();
         writeRequest.results = results;
         storageAPI.write(writeRequest);
 
