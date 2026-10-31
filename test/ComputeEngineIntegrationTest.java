@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import apis.JobHandler;
 import apis.computer.ComputerApiImplementation;
 import apis.userinput.InputRequest;
+import apis.userinput.InputResponse;
 import apis.userinput.UserInputApiImplementation;
 
 public class ComputeEngineIntegrationTest {
@@ -31,13 +32,11 @@ public class ComputeEngineIntegrationTest {
         UserInputApiImplementation inputImpl = new UserInputApiImplementation(dataStorageImpl, computerImpl);
 
         // instantiate jobHandler and inputRequest to process user input
-        JobHandler jobHandler = new JobHandler(computerImpl, dataStorageImpl, inputImpl);
         InputRequest request = new InputRequest();
-        jobHandler.handleJob(request);
+        InputResponse response = inputImpl.input(request);
 
         // assert output
         assertEquals(List.of("0", "17", "100"), output);
-        
+        assertEquals(JobHandler.SUCCESS_MESSAGE, response.getStatusMessage());
     }
-    
 }
