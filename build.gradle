@@ -1,19 +1,22 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'jacoco'
+}
 
-eclipse.project.name = 'Software-Engineering-' 
+eclipse.project.name = 'Software-Engineering-'
 
 sourceSets {
-	main {
-	  java {
-		srcDirs = ['src']
-	  }
-	}
-	test {
-	  java {
-	     srcDirs = ['test']
-	  }
-	 }
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
 }
 
 repositories {
@@ -22,15 +25,24 @@ repositories {
 
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.10.2')
-	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
-	testImplementation('org.mockito:mockito-core:5.10.0')
-	testImplementation ('fr.inria.gforge.spoon:spoon-core:11.0.0')
-	implementation('com.google.code.gson:gson:2.13.1')
+    testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+    testImplementation('org.mockito:mockito-core:5.24.0')
+    testImplementation('fr.inria.gforge.spoon:spoon-core:11.0.0')
+    implementation('com.google.code.gson:gson:2.13.1')
 }
 
 test {
     useJUnitPlatform()
     filter {
-        includeTestsMatching "Checkpoint3TestSuite"
+        excludeTestsMatching "Checkpoint1TestSuite"
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true
+        xml.required = true
+        csv.required = false
     }
 }
