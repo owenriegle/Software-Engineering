@@ -37,6 +37,12 @@ jobs:
       run: |
         curl -sS -D - https://api.github.com/rate_limit -o /tmp/rate.json
         cat /tmp/rate.json
+        
+    - name: Diagnose GitHub check-runs API
+      run: |
+        curl -sS -D - -o /tmp/check-runs.json \
+          https://api.github.com/repos/owenriegle/Software-Engineering/commits/0cbac31d3aa3b670d9991293d429d09c0f2fe938/check-runs
+        cat /tmp/check-runs.json
 
     - name: Build with Gradle Wrapper
       run: chmod a+rwx gradlew; ./gradlew build
