@@ -16,11 +16,11 @@ public class ComputeEngineIntegrationTest {
     void testComputeEngine() {
         
         // create user input and output lists
-        List<Integer> input = new ArrayList<>();
+        ArrayList<Integer> input = new ArrayList<>();
         input.add(1);
         input.add(10);
         input.add(25);
-        List<String> output = new ArrayList<>();
+        ArrayList<String> output = new ArrayList<>();
 
         // instantiate inputConfig and outputConfig objects with input and output lists
         TestInputConfig inputConfig = new TestInputConfig(input);
@@ -36,6 +36,7 @@ public class ComputeEngineIntegrationTest {
         InputResponse response = inputImpl.input(request);
 
         // assert output
+        System.out.println(output);
         assertEquals(List.of("0", "17", "100"), output);
         assertEquals(JobHandler.SUCCESS_MESSAGE, response.getStatusMessage());
     }

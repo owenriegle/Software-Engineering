@@ -1,8 +1,9 @@
-import java.util.List;
+import java.util.ArrayList;
 
 import apis.datastorage.DataStorageAPI;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
+import apis.datastorage.ReadResponseCode;
 import apis.datastorage.ReadResponseImplementation;
 import apis.datastorage.WriteRequest;
 import apis.datastorage.WriteResponse;
@@ -22,9 +23,8 @@ public class TestDataStorageApiImplementation implements DataStorageAPI {
     @Override
     public ReadResponse read(ReadRequest request) {
 
-        ReadResponseImplementation response = new ReadResponseImplementation();
-
-        List<Integer> inputValues = inputConfig.getInput();
+        ArrayList<Integer> inputValues = inputConfig.getInput();
+        ReadResponseImplementation response = new ReadResponseImplementation(inputValues, ReadResponseCode.SUCCESS);
         response.getData().addAll(inputValues);
 
         return response;
