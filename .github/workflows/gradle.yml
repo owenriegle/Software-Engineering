@@ -47,6 +47,16 @@ jobs:
     - name: Build with Gradle Wrapper
       run: chmod a+rwx gradlew; ./gradlew build
 
+    - name: Diagnose pull request API after tests
+      if: always()
+      run: |
+        echo "=== Rate limit ==="
+        curl -sS -D - https://api.github.com/rate_limit
+        echo ""
+        echo "=== Pull request 11 commits ==="
+        curl -sS -D - \
+          https://api.github.com/repos/owenriegle/Software-Engineering/pulls/11/commits
+
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
