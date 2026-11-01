@@ -18,7 +18,7 @@ public class JobHandler {
     private final ComputerAPI computerAPI;
     private final DataStorageAPI storageAPI;
 
-    public static final String INVALID_REQUEST_MESSAGE ="The input request is invalid or missing required information.";
+    public static final String INVALID_REQUEST_MESSAGE = "The input request is invalid or missing required information.";
     public static final String READ_FAILURE_MESSAGE = "Unable to read input data from the specified source.";
     public static final String COMPUTE_FAILURE_MESSAGE = "Unable to process the input data.";
     public static final String WRITE_FAILURE_MESSAGE = "Computation completed, but unable to write results to the specified destination.";
@@ -34,7 +34,7 @@ public class JobHandler {
     public String handleJob(InputRequest request) {
 
         if (request == null) {
-            return  INVALID_REQUEST_MESSAGE;
+            return INVALID_REQUEST_MESSAGE;
         }
 
         // obtain input data from the specified source
