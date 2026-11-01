@@ -1,14 +1,14 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class TestInputConfig {
     
-    private List<Integer> input;
+    private ArrayList<Integer> input;
 
-    public TestInputConfig(List<Integer> input) {
+    public TestInputConfig(ArrayList<Integer> input) {
         this.input = input;
     }
 
-    public List<Integer> getInput() {
+    public ArrayList<Integer> getInput() {
         return input;
     }
 
