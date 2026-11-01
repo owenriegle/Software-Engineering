@@ -25,7 +25,6 @@ public class TestDataStorageApiImplementation implements DataStorageAPI {
 
         ArrayList<Integer> inputValues = inputConfig.getInput();
         ReadResponseImplementation response = new ReadResponseImplementation(inputValues, ReadResponseCode.SUCCESS);
-        response.getData().addAll(inputValues);
 
         return response;
     }
