@@ -33,9 +33,6 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    filter {
-        excludeTestsMatching "Checkpoint1TestSuite"
-    }
 }
 
 jacocoTestReport {
