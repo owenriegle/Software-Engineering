@@ -6,4 +6,6 @@ public interface ReadResponse {
 
     ArrayList<Integer> getData();
 
+    ReadResponseCode getResponseCode();
+
 }
