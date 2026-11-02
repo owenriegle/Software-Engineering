@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
+      checks: read
+      statuses: read
 
     steps:
     - uses: actions/checkout@v5
@@ -45,6 +48,8 @@ jobs:
         cat /tmp/check-runs.json
 
     - name: Build with Gradle Wrapper
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: chmod a+rwx gradlew; ./gradlew build
 
     - name: Diagnose pull request API after tests

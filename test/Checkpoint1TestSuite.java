@@ -1,8 +1,9 @@
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -153,13 +154,27 @@ public class Checkpoint1TestSuite {
     private String curl(String toCurl) throws Exception {
         URL url = new URI(toCurl).toURL();
 
-        String result = "";
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-            String line; 
-            while ((line = reader.readLine()) != null) {
-                result += line + "\n";
-            }
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        String token = System.getenv("GITHUB_TOKEN");
+
+        if (token != null && !token.isBlank()) {
+            connection.setRequestProperty("Authorization", "Bearer " + token);
+            connection.setRequestProperty("Accept", "application/vnd.github+json");
         }
-        return result;
+
+        StringBuilder result = new StringBuilder();
+
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result.append(line).append("\n");
+            }
+        } finally {
+            connection.disconnect();
+        }
+
+        return result.toString();
     }
 }
