@@ -36,7 +36,6 @@ public class ComputeEngineIntegrationTest {
         InputResponse response = inputImpl.input(request);
 
         // assert output
-        System.out.println(output);
         assertEquals(List.of("0", "17", "100"), output);
         assertEquals(JobHandler.SUCCESS_MESSAGE, response.getStatusMessage());
     }
