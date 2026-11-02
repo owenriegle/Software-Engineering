@@ -1,6 +1,13 @@
+
 {
-    "java.checkstyle.configuration": "${workspaceFolder}\\checkstyle_checks.xml",
+    "java.checkstyle.configuration": "${workspaceFolder}/checkstyle_checks.xml",
     "java.checkstyle.version": "14.3.0",
     "java.debug.settings.onBuildFailureProceed": true,
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.test.config": {
+        "vmArgs": [
+            "-javaagent:/Users/owenriegle/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/5.24.0/277dd2f725dd344fba6216f0bc611fae7fc4c1d8/mockito-core-5.24.0.jar",
+            "-Xshare:off"
+        ]
+    }
 }

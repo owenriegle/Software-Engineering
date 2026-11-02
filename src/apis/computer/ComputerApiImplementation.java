@@ -7,22 +7,26 @@ public class ComputerApiImplementation implements ComputerAPI {
     @Override
     public ComputerResponse compute(ComputerRequest computerRequest) {
         
+        ArrayList<Integer> data = computerRequest.data;
         ArrayList<Integer> results = new ArrayList<>();
 
-        // iterate through input values
-        for (int inputValue : computerRequest.data) {
-            int sum = 0;
+        if (data != null && !data.isEmpty()) {
+            // iterate through input values
+            for (int inputValue : data) {
+                int sum = 0;
 
-            // count by 1 to sum all prime numbers less than or equal to input value
-            for (int counter = 2; counter <= inputValue; counter++) {
-                if (isPrime(counter)) {
-                    sum += counter;
+                // count by 1 to sum all prime numbers less than or equal to input value
+                for (int counter = 2; counter <= inputValue; counter++) {
+                    if (isPrime(counter)) {
+                        sum += counter;
+                    }
                 }
+                results.add(sum);
             }
-
-            results.add(sum);
-        }
         return new ComputerResponseImpl(results);
+        } else {
+            return new ComputerResponseImpl(results);
+        }
     }
 
     private static boolean isPrime(int n) {

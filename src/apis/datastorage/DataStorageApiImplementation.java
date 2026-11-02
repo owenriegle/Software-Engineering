@@ -13,6 +13,10 @@ public class DataStorageApiImplementation implements DataStorageAPI {
     @Override
     public ReadResponse read(ReadRequest request) {
 
+        if (request == null || request.inputSource == null || request.inputSource.isBlank()) {
+            return new ReadResponseImplementation(new ArrayList<>(), ReadResponseCode.FAILED);
+        }
+
         String filePath = request.inputSource;
         ArrayList<Integer> data = new ArrayList<>();
 
@@ -40,10 +44,15 @@ public class DataStorageApiImplementation implements DataStorageAPI {
 
     @Override
     public WriteResponse write(WriteRequest request) {
+
+        if (request == null || request.outputDestination == null || request.outputDestination.isBlank() 
+        || request.results == null || request.delimiter == null) {
+            return new WriteResponseImplementation(WriteResponseCode.FAILED);
+        }
         
         String filePath = request.outputDestination;
         ArrayList<Integer> data = request.results;
-
+        
         try (BufferedWriter br = new BufferedWriter(new FileWriter(filePath))) {
 
             // process output file
