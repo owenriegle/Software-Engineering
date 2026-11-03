@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class DataStorageApiImplementation implements DataStorageAPI {
 
+    private static final String DEFAULT_DELIMITER = ",";
+
     @Override
     public ReadResponse read(ReadRequest request) {
 
@@ -49,6 +51,12 @@ public class DataStorageApiImplementation implements DataStorageAPI {
         || request.results == null || request.delimiter == null) {
             return new WriteResponseImplementation(WriteResponseCode.FAILED);
         }
+
+        // assign default delimiter if not provided
+        String delimiter = request.delimiter;
+        if (delimiter.isEmpty()) {
+            delimiter = DEFAULT_DELIMITER;
+        }
         
         String filePath = request.outputDestination;
         ArrayList<Integer> data = request.results;
@@ -57,24 +65,31 @@ public class DataStorageApiImplementation implements DataStorageAPI {
 
             // process output file
             for (int i = 0; i < data.size(); i++) {
-                int value = data.get(i);
+
+                Integer value = data.get(i);
+
+                if (value == null) {
+                    return fileCleanup(filePath);
+                }
                 br.write(String.valueOf(value));
                 if (i != data.size() - 1) {
-                    br.write(request.delimiter);
+                    br.write(delimiter);
                 }
             }
             return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
             
         } catch (IOException e) {
-
-            // clean up incomplete output file
-            File file = new File(request.outputDestination);
-            if (!file.delete()) {
-                System.err.println("Unable to delete incomplete output file: " + file.getPath());
-            }
-
-            e.printStackTrace();
-            return new WriteResponseImplementation(WriteResponseCode.FAILED);
+            return fileCleanup(filePath);
         }
+    }
+
+    // file cleanup helper method
+    private WriteResponse fileCleanup(String filePath) {
+
+        File file = new File(filePath);
+        if (!file.delete()) {
+            System.err.println("Unable to delete incomplete output file: " + file.getPath());
+        }
+        return new WriteResponseImplementation(WriteResponseCode.FAILED);
     }
 }
