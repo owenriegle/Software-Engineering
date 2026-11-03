@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import apis.JobHandler;
 import apis.computer.ComputerAPI;
 import apis.computer.ComputerRequest;
+import apis.computer.ComputerResponseCode;
 import apis.computer.ComputerResponseImpl;
 import apis.datastorage.DataStorageAPI;
 import apis.datastorage.ReadRequest;
@@ -122,7 +123,7 @@ public class JobHandlerUnitTest {
 
         // simulate a null computer response
         Mockito.when(computerAPI.compute(Mockito.any(ComputerRequest.class)))
-        .thenReturn(new ComputerResponseImpl(null));
+        .thenReturn(new ComputerResponseImpl(null, ComputerResponseCode.FAILED));
 
         String result = jobHandler.handleJob(new InputRequest());
 
@@ -143,7 +144,7 @@ public class JobHandlerUnitTest {
 
         // simulate a computer response
         Mockito.when(computerAPI.compute(Mockito.any(ComputerRequest.class)))
-        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3))));
+        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3)), ComputerResponseCode.SUCCESS));
 
         Mockito.when(dataStorageAPI.write(Mockito.any(WriteRequest.class))).thenReturn(null);
 
@@ -167,7 +168,7 @@ public class JobHandlerUnitTest {
 
         // simulate a computer response
         Mockito.when(computerAPI.compute(Mockito.any(ComputerRequest.class)))
-        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3))));
+        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3)), ComputerResponseCode.SUCCESS));
 
         // simulate a failed storage write
         Mockito.when(dataStorageAPI.write(Mockito.any(WriteRequest.class)))
@@ -193,7 +194,7 @@ public class JobHandlerUnitTest {
 
         // simulate a computer response
         Mockito.when(computerAPI.compute(Mockito.any(ComputerRequest.class)))
-        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3))));
+        .thenReturn(new ComputerResponseImpl(new ArrayList<>(List.of(1, 2, 3)), ComputerResponseCode.SUCCESS));
 
         // simulate a successful storage write
         Mockito.when(dataStorageAPI.write(Mockito.any(WriteRequest.class)))
