@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import apis.computer.ComputerAPI;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
+import apis.computer.ComputerResponseCode;
 import apis.datastorage.DataStorageAPI;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
@@ -28,7 +29,6 @@ public class JobHandler {
 
         this.computerAPI = computerAPI;
         this.storageAPI = storageAPI;
-
     }
 
     public String handleJob(InputRequest request) {
@@ -43,22 +43,24 @@ public class JobHandler {
 
         // read data from storage
         ReadResponse readResponse = storageAPI.read(readRequest);
-        // if readResponse null or code is fail, return read failure
+        // if readResponse null or code isnt success, return read failure
         if (readResponse == null || readResponse.getResponseCode() != ReadResponseCode.SUCCESS) {
             return READ_FAILURE_MESSAGE;
         }
 
         // obtain data from readresponse for computation
-        ComputerRequest computerRequest = new ComputerRequest();
         if (readResponse.getData() == null) {
             return READ_FAILURE_MESSAGE;
         }
+        ComputerRequest computerRequest = new ComputerRequest();
         computerRequest.data = readResponse.getData();
 
         // pass the data to the compute engine for processing
         ComputerResponse computerResponse = computerAPI.compute(computerRequest);
-        // if computerResponse null or data is null, return compute failure
-        if (computerResponse == null || computerResponse.getResults() == null) {
+        // if computerResponse null, data is null, or code isnt success, return compute failure
+        if (computerResponse == null ||
+            computerResponse.getResponseCode() != ComputerResponseCode.SUCCESS ||
+            computerResponse.getResults() == null) {
             return COMPUTE_FAILURE_MESSAGE;
         }
 
@@ -72,9 +74,10 @@ public class JobHandler {
 
         WriteResponse writeResponse = storageAPI.write(writeRequest);
 
-        // if writeResponse null or code is fail, return write failure
+        // if writeResponse null or code isnt success, return write failure
         if (writeResponse == null || writeResponse.getResponseCode() != WriteResponseCode.SUCCESS) {
             return WRITE_FAILURE_MESSAGE;
+
         } else {
             return SUCCESS_MESSAGE;
         }
