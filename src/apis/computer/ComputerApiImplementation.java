@@ -11,30 +11,35 @@ public class ComputerApiImplementation implements ComputerAPI {
 
             return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
         }
-        
-        ArrayList<Integer> data = computerRequest.data;
-        ArrayList<Integer> results = new ArrayList<>();
 
-        if (data != null && !data.isEmpty()) {
-            // iterate through input values
-            for (Integer inputValue : data) {
+        try {
+            ArrayList<Integer> data = computerRequest.data;
+            ArrayList<Integer> results = new ArrayList<>();
 
-                if (inputValue == null) {
-                    return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
-                }
+            if (!data.isEmpty()) {
+                // iterate through input values
+                for (Integer inputValue : data) {
 
-                int sum = 0;
-                // count by 1 to sum all prime numbers less than or equal to input value
-                for (int counter = 2; counter <= inputValue; counter++) {
-                    if (isPrime(counter)) {
-                        sum += counter;
+                    if (inputValue == null) {
+                        return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
                     }
+
+                    int sum = 0;
+                    // count by 1 to sum all prime numbers less than or equal to input value
+                    for (int counter = 2; counter <= inputValue; counter++) {
+                        if (isPrime(counter)) {
+                            sum += counter;
+                        }
+                    }
+                    results.add(sum);
                 }
-                results.add(sum);
+                return new ComputerResponseImpl(results, ComputerResponseCode.SUCCESS);
+            } else {
+                return new ComputerResponseImpl(results, ComputerResponseCode.FAILED);
             }
-            return new ComputerResponseImpl(results, ComputerResponseCode.SUCCESS);
-        } else {
-            return new ComputerResponseImpl(results, ComputerResponseCode.FAILED);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
         }
     }
 
