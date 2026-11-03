@@ -36,10 +36,13 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             } else {
                 return new ReadResponseImplementation(data, ReadResponseCode.SUCCESS);
             }
-        } catch (IOException | NumberFormatException e) {
-
-            data.clear();
+        } catch (IOException e) {
             e.printStackTrace();
+            data.clear();
+            return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            data.clear();
             return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
         }
     }
@@ -79,6 +82,10 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
             
         } catch (IOException e) {
+            e.printStackTrace();
+            return fileCleanup(filePath);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
             return fileCleanup(filePath);
         }
     }
@@ -86,10 +93,17 @@ public class DataStorageApiImplementation implements DataStorageAPI {
     // file cleanup helper method
     private WriteResponse fileCleanup(String filePath) {
 
-        File file = new File(filePath);
-        if (!file.delete()) {
-            System.err.println("Unable to delete incomplete output file: " + file.getPath());
+        try {
+            File file = new File(filePath);
+
+            if (!file.delete()) {
+                System.err.println("Unable to delete incomplete output file: " + file.getPath());
+            }
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
+
         return new WriteResponseImplementation(WriteResponseCode.FAILED);
     }
 }
