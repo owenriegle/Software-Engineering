@@ -36,11 +36,7 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             } else {
                 return new ReadResponseImplementation(data, ReadResponseCode.SUCCESS);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            data.clear();
-            return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | IOException e) {
             e.printStackTrace();
             data.clear();
             return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
@@ -81,10 +77,7 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             }
             return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
             
-        } catch (IOException e) {
-            e.printStackTrace();
-            return fileCleanup(filePath);
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | IOException e) {
             e.printStackTrace();
             return fileCleanup(filePath);
         }
