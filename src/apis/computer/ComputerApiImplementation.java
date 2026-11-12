@@ -44,10 +44,6 @@ public class ComputerApiImplementation implements ComputerAPI {
     }
 
     private static boolean isPrime(int n) {
-        // 1 or less are not prime numbers
-        if (n <= 1) {
-            return false;
-        }
         // 2 is the only even prime number
         if (n == 2) {
             return true;
