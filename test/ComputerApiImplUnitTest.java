@@ -14,7 +14,7 @@ public class ComputerApiImplUnitTest {
     private ComputerApiImplementation computerApiImplementation;
     private ComputerRequest computerRequest;
 
-    @BeforeEach 
+    @BeforeEach
     void setUp() {
         computerApiImplementation = new ComputerApiImplementation();
         computerRequest = new ComputerRequest();
@@ -29,7 +29,7 @@ public class ComputerApiImplUnitTest {
         Assertions.assertTrue(response.getResults().isEmpty());
     }
 
-    @Test 
+    @Test
     void testRequestNullData() {
 
         ComputerResponse response = computerApiImplementation.compute(computerRequest);
@@ -38,26 +38,38 @@ public class ComputerApiImplUnitTest {
         Assertions.assertTrue(response.getResults().isEmpty());
     }
 
-    @Test 
+    @Test
     void testRequestEmptyData() {
 
         computerRequest.data = new ArrayList<>();
 
         ComputerResponse response = computerApiImplementation.compute(computerRequest);
-        
+
         Assertions.assertEquals(ComputerResponseCode.FAILED, response.getResponseCode());
         Assertions.assertTrue(response.getResults().isEmpty());
     }
 
-    @Test 
+    @Test
     void testRequestNullElement() {
 
         computerRequest.data = new ArrayList<>();
         computerRequest.data.add(null);
 
         ComputerResponse response = computerApiImplementation.compute(computerRequest);
-        
+
         Assertions.assertEquals(ComputerResponseCode.FAILED, response.getResponseCode());
         Assertions.assertTrue(response.getResults().isEmpty());
+    }
+
+    @Test
+    void testInputLessThanOrEqualToOne() {
+        computerRequest.data = new ArrayList<>();
+        computerRequest.data.add(1);
+
+        ComputerResponse response = computerApiImplementation.compute(computerRequest);
+
+        Assertions.assertEquals(ComputerResponseCode.SUCCESS, response.getResponseCode());
+        Assertions.assertEquals(1, response.getResults().size());
+        Assertions.assertEquals(0, response.getResults().get(0));
     }
 }
