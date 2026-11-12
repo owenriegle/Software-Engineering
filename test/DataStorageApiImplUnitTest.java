@@ -28,7 +28,7 @@ public class DataStorageApiImplUnitTest {
         readRequest = new ReadRequest();
     }
 
-    @Test 
+    @Test
     void testNullReadRequest() {
 
         ReadResponse response = dataStorageApi.read(null);
@@ -37,7 +37,7 @@ public class DataStorageApiImplUnitTest {
         Assertions.assertTrue(response.getData().isEmpty());
     }
 
-    @Test 
+    @Test
     void testBlankInputSource() {
 
         readRequest.inputSource = "";
@@ -48,7 +48,7 @@ public class DataStorageApiImplUnitTest {
         Assertions.assertTrue(response.getData().isEmpty());
     }
 
-    @Test 
+    @Test
     void testEmptyInputFile() throws IOException {
 
         File file = File.createTempFile("file", ".txt");
@@ -65,7 +65,7 @@ public class DataStorageApiImplUnitTest {
         }
     }
 
-    @Test 
+    @Test
     void testNotEmptyInputFile() throws IOException {
 
         File file = File.createTempFile("file", ".txt");
@@ -75,18 +75,18 @@ public class DataStorageApiImplUnitTest {
             br.write("10");
         }
         try {
-        readRequest.inputSource = filePath;
-        ReadResponse response = dataStorageApi.read(readRequest);
+            readRequest.inputSource = filePath;
+            ReadResponse response = dataStorageApi.read(readRequest);
 
-        Assertions.assertEquals(ReadResponseCode.SUCCESS, response.getResponseCode());
-        Assertions.assertFalse(response.getData().isEmpty());
+            Assertions.assertEquals(ReadResponseCode.SUCCESS, response.getResponseCode());
+            Assertions.assertFalse(response.getData().isEmpty());
 
         } finally {
             file.delete();
         }
     }
 
-    @Test 
+    @Test
     void testInvalidInputFileContents() throws IOException {
 
         File file = File.createTempFile("file", ".txt");
@@ -104,7 +104,7 @@ public class DataStorageApiImplUnitTest {
         }
     }
 
-    @Test 
+    @Test
     void testNullWriteRequest() {
 
         WriteResponse writeResponse = dataStorageApi.write(null);
@@ -120,9 +120,8 @@ public class DataStorageApiImplUnitTest {
         WriteResponse response = dataStorageApi.write(writeRequest);
 
         Assertions.assertEquals(
-            WriteResponseCode.FAILED,
-            response.getResponseCode()
-        );
+                WriteResponseCode.FAILED,
+                response.getResponseCode());
     }
 
     @Test
@@ -133,9 +132,8 @@ public class DataStorageApiImplUnitTest {
         WriteResponse response = dataStorageApi.write(writeRequest);
 
         Assertions.assertEquals(
-            WriteResponseCode.FAILED,
-            response.getResponseCode()
-        );
+                WriteResponseCode.FAILED,
+                response.getResponseCode());
     }
 
     @Test
@@ -147,12 +145,11 @@ public class DataStorageApiImplUnitTest {
         WriteResponse response = dataStorageApi.write(writeRequest);
 
         Assertions.assertEquals(
-            WriteResponseCode.FAILED,
-            response.getResponseCode()
-        );
+                WriteResponseCode.FAILED,
+                response.getResponseCode());
     }
 
-    @Test 
+    @Test
     void testNullDelimiter() {
         WriteRequest writeRequest = new WriteRequest();
         writeRequest.outputDestination = "test.txt";
@@ -170,67 +167,84 @@ public class DataStorageApiImplUnitTest {
         File file = File.createTempFile("file", ".txt");
 
         try {
-        WriteRequest writeRequest = new WriteRequest();
+            WriteRequest writeRequest = new WriteRequest();
 
-        writeRequest.outputDestination = file.getPath();
-        writeRequest.results = new ArrayList<>();
-        writeRequest.delimiter = "";
+            writeRequest.outputDestination = file.getPath();
+            writeRequest.results = new ArrayList<>();
+            writeRequest.delimiter = "";
 
-        writeRequest.results.add(null);
+            writeRequest.results.add(null);
 
-        WriteResponse response = dataStorageApi.write(writeRequest);
+            WriteResponse response = dataStorageApi.write(writeRequest);
 
-        Assertions.assertEquals(WriteResponseCode.FAILED, response.getResponseCode());
+            Assertions.assertEquals(WriteResponseCode.FAILED, response.getResponseCode());
         } finally {
             file.delete();
         }
     }
 
-    @Test 
+    @Test
+    void testWriteIOException() {
+
+        WriteRequest writeRequest = new WriteRequest();
+        writeRequest.outputDestination = "nonexistent_directory/test.txt";
+        writeRequest.results = new ArrayList<>();
+        writeRequest.delimiter = ",";
+
+        writeRequest.results.add(1);
+        writeRequest.results.add(2);
+        writeRequest.results.add(3);
+
+        WriteResponse response = dataStorageApi.write(writeRequest);
+        
+        Assertions.assertEquals(WriteResponseCode.FAILED, response.getResponseCode());
+    }
+
+    @Test
     void testWriteSuccessfulDefaultDelim() throws IOException {
 
         File file = File.createTempFile("file", ".txt");
 
         try {
-        WriteRequest writeRequest = new WriteRequest();
+            WriteRequest writeRequest = new WriteRequest();
 
-        writeRequest.outputDestination = file.getPath();
-        writeRequest.results = new ArrayList<>();
-        writeRequest.delimiter = "";
+            writeRequest.outputDestination = file.getPath();
+            writeRequest.results = new ArrayList<>();
+            writeRequest.delimiter = "";
 
-        writeRequest.results.add(10);
-        writeRequest.results.add(20);
-        writeRequest.results.add(30);
+            writeRequest.results.add(10);
+            writeRequest.results.add(20);
+            writeRequest.results.add(30);
 
-        WriteResponse response = dataStorageApi.write(writeRequest);
+            WriteResponse response = dataStorageApi.write(writeRequest);
 
-        Assertions.assertEquals(WriteResponseCode.SUCCESS, response.getResponseCode());
-        Assertions.assertEquals("10,20,30", Files.readString(file.toPath()));
+            Assertions.assertEquals(WriteResponseCode.SUCCESS, response.getResponseCode());
+            Assertions.assertEquals("10,20,30", Files.readString(file.toPath()));
         } finally {
             file.delete();
         }
     }
 
-    @Test 
+    @Test
     void testWriteSuccessfulNonDefaultDelim() throws IOException {
 
         File file = File.createTempFile("file", ".txt");
 
         try {
-        WriteRequest writeRequest = new WriteRequest();
+            WriteRequest writeRequest = new WriteRequest();
 
-        writeRequest.outputDestination = file.getPath();
-        writeRequest.results = new ArrayList<>();
-        writeRequest.delimiter = ";";
+            writeRequest.outputDestination = file.getPath();
+            writeRequest.results = new ArrayList<>();
+            writeRequest.delimiter = ";";
 
-        writeRequest.results.add(10);
-        writeRequest.results.add(20);
-        writeRequest.results.add(30);
+            writeRequest.results.add(10);
+            writeRequest.results.add(20);
+            writeRequest.results.add(30);
 
-        WriteResponse response = dataStorageApi.write(writeRequest);
+            WriteResponse response = dataStorageApi.write(writeRequest);
 
-        Assertions.assertEquals(WriteResponseCode.SUCCESS, response.getResponseCode());
-        Assertions.assertEquals("10;20;30", Files.readString(file.toPath()));
+            Assertions.assertEquals(WriteResponseCode.SUCCESS, response.getResponseCode());
+            Assertions.assertEquals("10;20;30", Files.readString(file.toPath()));
         } finally {
             file.delete();
         }
