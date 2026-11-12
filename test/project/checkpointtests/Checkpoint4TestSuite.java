@@ -14,16 +14,17 @@ public class Checkpoint4TestSuite {
     public void testFileWritten() throws Exception {
         Path inputPath = Paths.get(ManualTestingFramework.INPUT);
         Files.deleteIfExists(inputPath);
-        
-        // Checkpoint 4 Note: If you chose a different input file format (ex: csv), you're
+
+        // Checkpoint 4 Note: If you chose a different input file format (ex: csv),
+        // you're
         // allowed to update this line to create differently-formatted input data
         Files.write(inputPath, "1\n2\n3".getBytes());
-        
+
         ManualTestingFramework.main(new String[] {});
-        
+
         Path outputPath = Paths.get(ManualTestingFramework.OUTPUT);
         List<String> allLines = Files.readAllLines(outputPath);
-        Assertions.assertTrue(allLines.size() == 1, 
+        Assertions.assertTrue(allLines.size() == 1,
                 "Make sure that the output is all written to one comma-separated line");
         String[] results = allLines.get(0).split(",");
         Assertions.assertTrue(results.length == 3, "Make sure exactly one output is created for each input");
