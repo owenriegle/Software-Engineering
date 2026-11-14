@@ -6,4 +6,5 @@ public interface ComputerResponse {
 
     ArrayList<Integer> getResults();
 
+    ComputerResponseCode getResponseCode();
 }

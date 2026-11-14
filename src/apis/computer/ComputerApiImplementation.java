@@ -6,34 +6,44 @@ public class ComputerApiImplementation implements ComputerAPI {
 
     @Override
     public ComputerResponse compute(ComputerRequest computerRequest) {
-        
-        ArrayList<Integer> data = computerRequest.data;
-        ArrayList<Integer> results = new ArrayList<>();
 
-        if (data != null && !data.isEmpty()) {
-            // iterate through input values
-            for (int inputValue : data) {
-                int sum = 0;
+        if (computerRequest == null || computerRequest.data == null) {
 
-                // count by 1 to sum all prime numbers less than or equal to input value
-                for (int counter = 2; counter <= inputValue; counter++) {
-                    if (isPrime(counter)) {
-                        sum += counter;
+            return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
+        }
+
+        try {
+            ArrayList<Integer> data = computerRequest.data;
+            ArrayList<Integer> results = new ArrayList<>();
+
+            if (!data.isEmpty()) {
+                // iterate through input values
+                for (Integer inputValue : data) {
+
+                    if (inputValue == null) {
+                        return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
                     }
+
+                    int sum = 0;
+                    // count by 1 to sum all prime numbers less than or equal to input value
+                    for (int counter = 2; counter <= inputValue; counter++) {
+                        if (isPrime(counter)) {
+                            sum += counter;
+                        }
+                    }
+                    results.add(sum);
                 }
-                results.add(sum);
+                return new ComputerResponseImpl(results, ComputerResponseCode.SUCCESS);
+            } else {
+                return new ComputerResponseImpl(results, ComputerResponseCode.FAILED);
             }
-        return new ComputerResponseImpl(results);
-        } else {
-            return new ComputerResponseImpl(results);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
         }
     }
 
     private static boolean isPrime(int n) {
-        // 1 or less are not prime numbers
-        if (n <= 1) {
-            return false;
-        }
         // 2 is the only even prime number
         if (n == 2) {
             return true;
@@ -43,13 +53,11 @@ public class ComputerApiImplementation implements ComputerAPI {
             return false;
         }
         // Check odd factors up to the square root of n
-        for (int i = 3; i * i <= n; i += 2) {
+        for (int i = 3; i <= n / i; i += 2) {
             if (n % i == 0) {
                 return false;
             }
         }
-    
         return true;
     }
-
 }
