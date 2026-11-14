@@ -35,6 +35,24 @@ public class JobHandlerUnitTest {
         jobHandler = new JobHandler(computerAPI, dataStorageAPI);
     }
 
+    @Test 
+    void testNullComputerAPIDependency() {
+
+        Assertions.assertThrows(
+            NullPointerException.class,
+            () -> new JobHandler(null, dataStorageAPI));
+        Mockito.verifyNoInteractions(computerAPI, dataStorageAPI);
+    }
+    
+    @Test 
+    void testNullDataStorageAPIDependency() {
+
+        Assertions.assertThrows(
+            NullPointerException.class,
+            () -> new JobHandler(computerAPI, null));
+        Mockito.verifyNoInteractions(computerAPI, dataStorageAPI);
+    }
+
     @Test
     void testNullInputRequest() {
 
@@ -43,6 +61,19 @@ public class JobHandlerUnitTest {
         // verify expected failure and that dependencies werent called
         Assertions.assertEquals(JobHandler.INVALID_REQUEST_MESSAGE, result);
         Mockito.verifyNoInteractions(computerAPI, dataStorageAPI);
+    }
+
+    @Test 
+    void testRuntimeExceptionDuringRead() {
+        
+        Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class))).thenThrow(new IllegalStateException());
+
+        InputRequest inputRequest = new InputRequest();
+        String result = jobHandler.handleJob(inputRequest);
+
+        Assertions.assertEquals(JobHandler.GENERAL_FAILURE_MESSAGE, result);
+        Mockito.verify(computerAPI, never()).compute(Mockito.any(ComputerRequest.class));
+        Mockito.verify(dataStorageAPI, never()).write(Mockito.any(WriteRequest.class));
     }
 
     @Test
