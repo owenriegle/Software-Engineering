@@ -60,8 +60,8 @@ public class MultiThreadedComputerService implements ComputerService {
 
                         if (response == null
                                 || response.getResponseCode() != ComputerResponseCode.SUCCESS
-                                || response.getResults() != null
-                                || response.getResults().size() == 1) {
+                                || response.getResults() == null
+                                || response.getResults().size() != 1) {
 
                             return new ComputerResponseImpl(new ArrayList<>(), ComputerResponseCode.FAILED);
                         }
