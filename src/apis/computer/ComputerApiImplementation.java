@@ -2,7 +2,7 @@ package apis.computer;
 
 import java.util.ArrayList;
 
-public class ComputerApiImplementation implements ComputerAPI {
+public class ComputerApiImplementation implements ComputerAPI, ComputerService {
 
     @Override
     public ComputerResponse compute(ComputerRequest computerRequest) {
