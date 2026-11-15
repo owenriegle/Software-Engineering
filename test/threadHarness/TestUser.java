@@ -1,24 +1,28 @@
-package threadHarness;
+package threadharness;
 
 import java.io.File;
 
+import apis.userinput.InputRequest;
+import apis.userinput.UserInputAPI;
 
 public class TestUser {
 	
-	// TODO 3: change the type of this variable to the name you're using for your
-	// @NetworkAPI interface; also update the parameter passed to the constructor
-	private final ComputationCoordinator coordinator;
+	private final UserInputAPI coordinator;
 
-	public TestUser(ComputationCoordinator coordinator) {
+	public TestUser(UserInputAPI coordinator) {
 		this.coordinator = coordinator;
 	}
 
 	public void run(String outputPath) {
 		char delimiter = ';';
 		String inputPath = "test" + File.separatorChar + "testInputFile.test";
-		
-		// TODO 4: Call the appropriate method(s) on the coordinator to get it to 
-		// run the compute job specified by inputPath, outputPath, and delimiter
+
+		InputRequest inputRequest = new InputRequest();
+		inputRequest.delimiter = Character.toString(delimiter);
+		inputRequest.inputSource = inputPath;
+		inputRequest.outputDestination = outputPath;
+
+		coordinator.input(inputRequest);
 	}
 
 }
