@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import apis.computer.ComputerApiImpl;
 import apis.datastorage.DataStorageApiImpl;
+import apis.userinput.ConcurrentUserInputApi;
 import apis.userinput.UserInputApi;
-import apis.userinput.UserInputApiImpl;
 
 public class TestMultiUser {
 
@@ -26,7 +26,7 @@ public class TestMultiUser {
 	public void initializeComputeEngine() {
 		DataStorageApiImpl dataStorageAPI = new DataStorageApiImpl();
 		ComputerApiImpl computerAPI = new ComputerApiImpl();
-		coordinator = new UserInputApiImpl(dataStorageAPI, computerAPI);
+		coordinator = new ConcurrentUserInputApi(dataStorageAPI, computerAPI);
 	}
 
 	@Test
