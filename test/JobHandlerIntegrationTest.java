@@ -1,6 +1,6 @@
 import apis.JobHandler;
-import apis.computer.ComputerAPI;
 import apis.computer.ComputerRequest;
+import apis.computer.ComputerService;
 import apis.datastorage.DataStorageApiImplementation;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
@@ -20,15 +20,15 @@ public class JobHandlerIntegrationTest {
     @Test
     void testExceptionHandlingIntegration() throws Exception {
 
-        ComputerAPI computerAPI = Mockito.mock(ComputerAPI.class);
+        ComputerService computerService = Mockito.mock(ComputerService.class);
 
-        Mockito.when(computerAPI.compute(Mockito.any()))
+        Mockito.when(computerService.compute(Mockito.any()))
                 .thenThrow(new IllegalStateException("Simulated computation failure"));
 
         DataStorageApiImplementation dataStorageApiImplementation = new DataStorageApiImplementation();
 
         UserInputApiImplementation userInputApiImplementation = new UserInputApiImplementation(
-                dataStorageApiImplementation, computerAPI);
+                dataStorageApiImplementation, computerService);
 
         File input = File.createTempFile("input", ".txt");
         File output = File.createTempFile("output", ".txt");
@@ -48,7 +48,7 @@ public class JobHandlerIntegrationTest {
                     JobHandler.GENERAL_FAILURE_MESSAGE,
                     inputResponse.getStatusMessage());
 
-            Mockito.verify(computerAPI).compute(Mockito.any(ComputerRequest.class));
+            Mockito.verify(computerService).compute(Mockito.any(ComputerRequest.class));
 
         } finally {
             Files.deleteIfExists(input.toPath());

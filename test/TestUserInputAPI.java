@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.computer.ComputerAPI;
+import apis.computer.ComputerService;
 import apis.datastorage.DataStorageAPI;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
@@ -15,15 +15,15 @@ public class TestUserInputAPI {
     void testInputSmoke() {
 
         DataStorageAPI storage = Mockito.mock(DataStorageAPI.class);
-        ComputerAPI computer = Mockito.mock(ComputerAPI.class);
-        UserInputAPI api = new UserInputApiImplementation(storage, computer);
+        ComputerService computerService = Mockito.mock(ComputerService.class);
+        UserInputAPI api = new UserInputApiImplementation(storage, computerService);
 
         InputRequest request = new InputRequest();
 
         InputResponse response = api.input(request);
 
         Assertions.assertNotNull(response);
-        
+
     }
-    
+
 }

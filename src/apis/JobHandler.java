@@ -3,9 +3,9 @@ package apis;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import apis.computer.ComputerAPI;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
+import apis.computer.ComputerService;
 import apis.datastorage.DataStorageAPI;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
@@ -17,7 +17,7 @@ import apis.userinput.InputRequest;
 
 public class JobHandler {
 
-    private final ComputerAPI computerAPI;
+    private final ComputerService computerService;
     private final DataStorageAPI storageAPI;
 
     public static final String INVALID_REQUEST_MESSAGE = "The input request is invalid or missing required information.";
@@ -27,9 +27,9 @@ public class JobHandler {
     public static final String GENERAL_FAILURE_MESSAGE = "The job could not be completed due to an unexpected error.";
     public static final String SUCCESS_MESSAGE = "Computation completed successfully. Results written to the specified destination.";
 
-    public JobHandler(ComputerAPI computerAPI, DataStorageAPI storageAPI) {
+    public JobHandler(ComputerService computerAPI, DataStorageAPI storageAPI) {
 
-        this.computerAPI = Objects.requireNonNull(computerAPI);
+        this.computerService = Objects.requireNonNull(computerAPI);
         this.storageAPI = Objects.requireNonNull(storageAPI);
 
     }
@@ -60,7 +60,7 @@ public class JobHandler {
             computerRequest.data = readResponse.getData();
 
             // pass the data to the compute engine for processing
-            ComputerResponse computerResponse = computerAPI.compute(computerRequest);
+            ComputerResponse computerResponse = computerService.compute(computerRequest);
             // if computerResponse null or data is null, return compute failure
             if (computerResponse == null || computerResponse.getResults() == null) {
                 return COMPUTE_FAILURE_MESSAGE;
