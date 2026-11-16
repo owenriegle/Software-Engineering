@@ -4,19 +4,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import apis.computer.ComputerApiImplementation;
+import apis.computer.ComputerApiImpl;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
 import apis.computer.ComputerResponseCode;
 
 public class ComputerApiImplUnitTest {
 
-    private ComputerApiImplementation computerApiImplementation;
+    private ComputerApiImpl computerApiImplementation;
     private ComputerRequest computerRequest;
 
     @BeforeEach
     void setUp() {
-        computerApiImplementation = new ComputerApiImplementation();
+        computerApiImplementation = new ComputerApiImpl();
         computerRequest = new ComputerRequest();
     }
 

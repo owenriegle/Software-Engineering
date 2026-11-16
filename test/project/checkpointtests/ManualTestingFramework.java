@@ -1,9 +1,9 @@
 package project.checkpointtests;
 
-import apis.computer.ComputerApiImplementation;
-import apis.datastorage.DataStorageApiImplementation;
+import apis.computer.ComputerApiImpl;
+import apis.datastorage.DataStorageApiImpl;
 import apis.userinput.InputRequest;
-import apis.userinput.UserInputApiImplementation;
+import apis.userinput.UserInputApiImpl;
 
 public class ManualTestingFramework {
 
@@ -12,9 +12,9 @@ public class ManualTestingFramework {
 
     public static void main(String[] args) {
 
-        ComputerApiImplementation computerAPI = new ComputerApiImplementation();
-        DataStorageApiImplementation dataStorageAPI = new DataStorageApiImplementation();
-        UserInputApiImplementation userInputApi = new UserInputApiImplementation(dataStorageAPI, computerAPI);
+        ComputerApiImpl computerAPI = new ComputerApiImpl();
+        DataStorageApiImpl dataStorageAPI = new DataStorageApiImpl();
+        UserInputApiImpl userInputApi = new UserInputApiImpl(dataStorageAPI, computerAPI);
 
         InputRequest inputRequest = new InputRequest();
         inputRequest.inputSource = INPUT;

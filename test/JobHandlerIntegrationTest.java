@@ -1,10 +1,10 @@
 import apis.JobHandler;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerService;
-import apis.datastorage.DataStorageApiImplementation;
+import apis.datastorage.DataStorageApiImpl;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
-import apis.userinput.UserInputApiImplementation;
+import apis.userinput.UserInputApiImpl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -25,9 +25,9 @@ public class JobHandlerIntegrationTest {
         Mockito.when(computerService.compute(Mockito.any()))
                 .thenThrow(new IllegalStateException("Simulated computation failure"));
 
-        DataStorageApiImplementation dataStorageApiImplementation = new DataStorageApiImplementation();
+        DataStorageApiImpl dataStorageApiImplementation = new DataStorageApiImpl();
 
-        UserInputApiImplementation userInputApiImplementation = new UserInputApiImplementation(
+        UserInputApiImpl userInputApiImplementation = new UserInputApiImpl(
                 dataStorageApiImplementation, computerService);
 
         File input = File.createTempFile("input", ".txt");

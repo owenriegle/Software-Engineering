@@ -1,10 +1,10 @@
 import java.util.List;
 
-public class TestOutputConfig {
+public class OutputConfigTest {
     
     private List<String> output;
 
-    public TestOutputConfig(List<String> output) {
+    public OutputConfigTest(List<String> output) {
         this.output = output;
     }
     

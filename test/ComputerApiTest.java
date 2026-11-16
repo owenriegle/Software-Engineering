@@ -2,17 +2,17 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.computer.ComputerAPI;
-import apis.computer.ComputerApiImplementation;
+import apis.computer.ComputerApi;
+import apis.computer.ComputerApiImpl;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
 
-public class TestComputerAPI {
+public class ComputerApiTest {
 
     @Test
     void testCompute() {
 
-        ComputerAPI api = new ComputerApiImplementation();
+        ComputerApi api = new ComputerApiImpl();
 
         ComputerRequest request = Mockito.mock(ComputerRequest.class);
 

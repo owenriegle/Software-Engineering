@@ -2,19 +2,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import apis.datastorage.DataStorageAPI;
-import apis.datastorage.DataStorageApiImplementation;
+import apis.datastorage.DataStorageApi;
+import apis.datastorage.DataStorageApiImpl;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
 import apis.datastorage.WriteRequest;
 import apis.datastorage.WriteResponse;
 
-public class TestDataStorageAPI {
+public class DataStorageApiTest {
     
     @Test
     void testReadSmoke() {
 
-        DataStorageAPI api = new DataStorageApiImplementation();
+        DataStorageApi api = new DataStorageApiImpl();
 
         ReadRequest request = Mockito.mock(ReadRequest.class);
 
@@ -27,7 +27,7 @@ public class TestDataStorageAPI {
     @Test
     void testWriteSmoke() {
 
-        DataStorageAPI api = new DataStorageApiImplementation();
+        DataStorageApi api = new DataStorageApiImpl();
 
         WriteRequest request = Mockito.mock(WriteRequest.class);
 

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import apis.datastorage.DataStorageApiImplementation;
+import apis.datastorage.DataStorageApiImpl;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
 import apis.datastorage.ReadResponseCode;
@@ -19,12 +19,12 @@ import apis.datastorage.WriteResponseCode;
 
 public class DataStorageApiImplUnitTest {
 
-    private DataStorageApiImplementation dataStorageApi;
+    private DataStorageApiImpl dataStorageApi;
     private ReadRequest readRequest;
 
     @BeforeEach
     void setUp() {
-        dataStorageApi = new DataStorageApiImplementation();
+        dataStorageApi = new DataStorageApiImpl();
         readRequest = new ReadRequest();
     }
 

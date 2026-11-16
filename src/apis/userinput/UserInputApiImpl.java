@@ -2,13 +2,13 @@ package apis.userinput;
 
 import apis.JobHandler;
 import apis.computer.ComputerService;
-import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApi;
 
-public class UserInputApiImplementation implements UserInputAPI {
+public class UserInputApiImpl implements UserInputApi {
 
     private final JobHandler jobHandler;
 
-    public UserInputApiImplementation(DataStorageAPI dataStorageAPI, ComputerService computerService) {
+    public UserInputApiImpl(DataStorageApi dataStorageAPI, ComputerService computerService) {
 
         this.jobHandler = new JobHandler(computerService, dataStorageAPI);
     }

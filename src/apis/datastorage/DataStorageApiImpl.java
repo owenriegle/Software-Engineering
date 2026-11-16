@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataStorageApiImplementation implements DataStorageAPI {
+public class DataStorageApiImpl implements DataStorageApi {
 
     private static final String DEFAULT_DELIMITER = ",";
 
@@ -16,7 +16,7 @@ public class DataStorageApiImplementation implements DataStorageAPI {
     public ReadResponse read(ReadRequest request) {
 
         if (request == null || request.inputSource == null || request.inputSource.isBlank()) {
-            return new ReadResponseImplementation(new ArrayList<>(), ReadResponseCode.FAILED);
+            return new ReadResponseImpl(new ArrayList<>(), ReadResponseCode.FAILED);
         }
 
         String filePath = request.inputSource;
@@ -32,14 +32,14 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             }
             // check if input file was empty and no data was processed
             if (data.isEmpty()) {
-                return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
+                return new ReadResponseImpl(data, ReadResponseCode.FAILED);
             } else {
-                return new ReadResponseImplementation(data, ReadResponseCode.SUCCESS);
+                return new ReadResponseImpl(data, ReadResponseCode.SUCCESS);
             }
         } catch (RuntimeException | IOException e) {
             e.printStackTrace();
             data.clear();
-            return new ReadResponseImplementation(data, ReadResponseCode.FAILED);
+            return new ReadResponseImpl(data, ReadResponseCode.FAILED);
         }
     }
 
@@ -48,7 +48,7 @@ public class DataStorageApiImplementation implements DataStorageAPI {
 
         if (request == null || request.outputDestination == null || request.outputDestination.isBlank() 
         || request.results == null || request.delimiter == null) {
-            return new WriteResponseImplementation(WriteResponseCode.FAILED);
+            return new WriteResponseImpl(WriteResponseCode.FAILED);
         }
 
         // assign default delimiter if not provided
@@ -75,7 +75,7 @@ public class DataStorageApiImplementation implements DataStorageAPI {
                     br.write(delimiter);
                 }
             }
-            return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
+            return new WriteResponseImpl(WriteResponseCode.SUCCESS);
             
         } catch (RuntimeException | IOException e) {
             e.printStackTrace();
@@ -97,6 +97,6 @@ public class DataStorageApiImplementation implements DataStorageAPI {
             e.printStackTrace();
         }
 
-        return new WriteResponseImplementation(WriteResponseCode.FAILED);
+        return new WriteResponseImpl(WriteResponseCode.FAILED);
     }
 }

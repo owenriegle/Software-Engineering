@@ -3,7 +3,7 @@ package apis.datastorage;
 import project.annotations.ProcessAPI;
 
 @ProcessAPI
-public interface DataStorageAPI {
+public interface DataStorageApi {
 
 	// compute engine requests integers from storage
 	ReadResponse read(ReadRequest request);

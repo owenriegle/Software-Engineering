@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import apis.JobHandler;
-import apis.computer.ComputerApiImplementation;
+import apis.computer.ComputerApiImpl;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
-import apis.userinput.MultiThreadedUserInputApiImplementation;
-import apis.userinput.UserInputApiImplementation;
+import apis.userinput.ConcurrentUserInputApi;
+import apis.userinput.UserInputApiImpl;
 
 public class ComputeEngineIntegrationTest {
 
@@ -24,14 +24,14 @@ public class ComputeEngineIntegrationTest {
         ArrayList<String> output = new ArrayList<>();
 
         // instantiate inputConfig and outputConfig objects with input and output lists
-        TestInputConfig inputConfig = new TestInputConfig(input);
-        TestOutputConfig outputConfig = new TestOutputConfig(output);
+        InputConfigTest inputConfig = new InputConfigTest(input);
+        OutputConfigTest outputConfig = new OutputConfigTest(output);
 
         // instantiate api implementations
-        TestDataStorageApiImplementation dataStorageImpl = new TestDataStorageApiImplementation(inputConfig,
+        DataStorageApiImplTest dataStorageImpl = new DataStorageApiImplTest(inputConfig,
                 outputConfig);
-        ComputerApiImplementation computerImpl = new ComputerApiImplementation();
-        UserInputApiImplementation inputImpl = new UserInputApiImplementation(dataStorageImpl, computerImpl);
+        ComputerApiImpl computerImpl = new ComputerApiImpl();
+        UserInputApiImpl inputImpl = new UserInputApiImpl(dataStorageImpl, computerImpl);
 
         // instantiate jobHandler and inputRequest to process user input
         InputRequest request = new InputRequest();
@@ -53,14 +53,14 @@ public class ComputeEngineIntegrationTest {
         ArrayList<String> output = new ArrayList<>();
 
         // instantiate inputConfig and outputConfig objects with input and output lists
-        TestInputConfig inputConfig = new TestInputConfig(input);
-        TestOutputConfig outputConfig = new TestOutputConfig(output);
+        InputConfigTest inputConfig = new InputConfigTest(input);
+        OutputConfigTest outputConfig = new OutputConfigTest(output);
 
         // instantiate api implementations
-        TestDataStorageApiImplementation dataStorageImpl = new TestDataStorageApiImplementation(inputConfig,
+        DataStorageApiImplTest dataStorageImpl = new DataStorageApiImplTest(inputConfig,
                 outputConfig);
-        ComputerApiImplementation computerImpl = new ComputerApiImplementation();
-        MultiThreadedUserInputApiImplementation inputImpl = new MultiThreadedUserInputApiImplementation(dataStorageImpl,
+        ComputerApiImpl computerImpl = new ComputerApiImpl();
+        ConcurrentUserInputApi inputImpl = new ConcurrentUserInputApi(dataStorageImpl,
                 computerImpl);
 
         // instantiate jobHandler and inputRequest to process user input

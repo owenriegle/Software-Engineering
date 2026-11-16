@@ -1,10 +1,10 @@
 package apis.datastorage;
 
-public class WriteResponseImplementation implements WriteResponse {
+public class WriteResponseImpl implements WriteResponse {
 
     private final WriteResponseCode responseCode;
 
-    public WriteResponseImplementation(WriteResponseCode responseCode) {
+    public WriteResponseImpl(WriteResponseCode responseCode) {
         this.responseCode = responseCode;
     }
 

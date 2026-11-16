@@ -8,12 +8,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class MultiThreadedComputerService implements ComputerService {
+public class ConcurrentComputerApi implements ComputerService {
 
-    private final ComputerAPI computerAPI;
+    private final ComputerApi computerAPI;
     private static final int MAX_THREADS = 4;
 
-    public MultiThreadedComputerService(ComputerAPI computerAPI) {
+    public ConcurrentComputerApi(ComputerApi computerAPI) {
         this.computerAPI = Objects.requireNonNull(computerAPI);
     }
 

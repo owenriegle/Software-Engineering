@@ -3,7 +3,7 @@ package apis.computer;
 import project.annotations.ConceptualAPI;
 
 @ConceptualAPI
-public interface ComputerAPI {
+public interface ComputerApi {
 
 	ComputerResponse compute(ComputerRequest computerRequest);
 

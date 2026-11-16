@@ -1,21 +1,21 @@
 import java.util.ArrayList;
 
-import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApi;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
 import apis.datastorage.ReadResponseCode;
-import apis.datastorage.ReadResponseImplementation;
+import apis.datastorage.ReadResponseImpl;
 import apis.datastorage.WriteRequest;
 import apis.datastorage.WriteResponse;
 import apis.datastorage.WriteResponseCode;
-import apis.datastorage.WriteResponseImplementation;
+import apis.datastorage.WriteResponseImpl;
 
-public class TestDataStorageApiImplementation implements DataStorageAPI {
+public class DataStorageApiImplTest implements DataStorageApi {
 
-    private final TestInputConfig inputConfig;
-    private final TestOutputConfig outputConfig;
+    private final InputConfigTest inputConfig;
+    private final OutputConfigTest outputConfig;
 
-    public TestDataStorageApiImplementation(TestInputConfig inputConfig, TestOutputConfig outputConfig) {
+    public DataStorageApiImplTest(InputConfigTest inputConfig, OutputConfigTest outputConfig) {
         this.inputConfig = inputConfig;
         this.outputConfig = outputConfig;
     }
@@ -24,7 +24,7 @@ public class TestDataStorageApiImplementation implements DataStorageAPI {
     public ReadResponse read(ReadRequest request) {
 
         ArrayList<Integer> inputValues = inputConfig.getInput();
-        ReadResponseImplementation response = new ReadResponseImplementation(inputValues, ReadResponseCode.SUCCESS);
+        ReadResponseImpl response = new ReadResponseImpl(inputValues, ReadResponseCode.SUCCESS);
 
         return response;
     }
@@ -36,6 +36,6 @@ public class TestDataStorageApiImplementation implements DataStorageAPI {
             outputConfig.getOutput().add(value.toString());
         }
 
-        return new WriteResponseImplementation(WriteResponseCode.SUCCESS);
+        return new WriteResponseImpl(WriteResponseCode.SUCCESS);
     }
 }

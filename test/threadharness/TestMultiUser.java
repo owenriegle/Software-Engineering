@@ -13,20 +13,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import apis.computer.ComputerApiImplementation;
-import apis.datastorage.DataStorageApiImplementation;
-import apis.userinput.UserInputAPI;
-import apis.userinput.UserInputApiImplementation;
+import apis.computer.ComputerApiImpl;
+import apis.datastorage.DataStorageApiImpl;
+import apis.userinput.UserInputApi;
+import apis.userinput.UserInputApiImpl;
 
 public class TestMultiUser {
 
-	private UserInputAPI coordinator;
+	private UserInputApi coordinator;
 
 	@BeforeEach
 	public void initializeComputeEngine() {
-		DataStorageApiImplementation dataStorageAPI = new DataStorageApiImplementation();
-		ComputerApiImplementation computerAPI = new ComputerApiImplementation();
-		coordinator = new UserInputApiImplementation(dataStorageAPI, computerAPI);
+		DataStorageApiImpl dataStorageAPI = new DataStorageApiImpl();
+		ComputerApiImpl computerAPI = new ComputerApiImpl();
+		coordinator = new UserInputApiImpl(dataStorageAPI, computerAPI);
 	}
 
 	@Test

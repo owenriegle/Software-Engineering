@@ -3,13 +3,13 @@ package threadharness;
 import java.io.File;
 
 import apis.userinput.InputRequest;
-import apis.userinput.UserInputAPI;
+import apis.userinput.UserInputApi;
 
 public class TestUser {
 	
-	private final UserInputAPI coordinator;
+	private final UserInputApi coordinator;
 
-	public TestUser(UserInputAPI coordinator) {
+	public TestUser(UserInputApi coordinator) {
 		this.coordinator = coordinator;
 	}
 

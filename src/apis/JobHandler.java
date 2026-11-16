@@ -6,7 +6,7 @@ import java.util.Objects;
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
 import apis.computer.ComputerService;
-import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApi;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponse;
 import apis.datastorage.ReadResponseCode;
@@ -18,7 +18,7 @@ import apis.userinput.InputRequest;
 public class JobHandler {
 
     private final ComputerService computerService;
-    private final DataStorageAPI storageAPI;
+    private final DataStorageApi storageAPI;
 
     public static final String INVALID_REQUEST_MESSAGE = "The input request is invalid or missing required information.";
     public static final String READ_FAILURE_MESSAGE = "Unable to read input data from the specified source.";
@@ -27,7 +27,7 @@ public class JobHandler {
     public static final String GENERAL_FAILURE_MESSAGE = "The job could not be completed due to an unexpected error.";
     public static final String SUCCESS_MESSAGE = "Computation completed successfully. Results written to the specified destination.";
 
-    public JobHandler(ComputerService computerAPI, DataStorageAPI storageAPI) {
+    public JobHandler(ComputerService computerAPI, DataStorageApi storageAPI) {
 
         this.computerService = Objects.requireNonNull(computerAPI);
         this.storageAPI = Objects.requireNonNull(storageAPI);

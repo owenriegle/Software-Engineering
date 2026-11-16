@@ -2,10 +2,10 @@ package apis.datastorage;
 
 import project.annotations.ProcessAPIPrototype;
 
-public class PrototypeDataStorageAPI {
+public class PrototypeDataStorageApi {
 	
 	@ProcessAPIPrototype
-	public void prototype(DataStorageAPI api) {
+	public void prototype(DataStorageApi api) {
 		
 		// compute engine requests integers from storage
 		ReadResponse read = api.read(new ReadRequest());

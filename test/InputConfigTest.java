@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class TestInputConfig {
+public class InputConfigTest {
     
     private ArrayList<Integer> input;
 
-    public TestInputConfig(ArrayList<Integer> input) {
+    public InputConfigTest(ArrayList<Integer> input) {
         this.input = input;
     }
 

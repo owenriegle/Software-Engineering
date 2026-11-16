@@ -3,20 +3,20 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import apis.computer.ComputerService;
-import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApi;
 import apis.userinput.InputRequest;
 import apis.userinput.InputResponse;
-import apis.userinput.UserInputAPI;
-import apis.userinput.UserInputApiImplementation;
+import apis.userinput.UserInputApi;
+import apis.userinput.UserInputApiImpl;
 
 public class TestUserInputAPI {
 
     @Test
     void testInputSmoke() {
 
-        DataStorageAPI storage = Mockito.mock(DataStorageAPI.class);
+        DataStorageApi storage = Mockito.mock(DataStorageApi.class);
         ComputerService computerService = Mockito.mock(ComputerService.class);
-        UserInputAPI api = new UserInputApiImplementation(storage, computerService);
+        UserInputApi api = new UserInputApiImpl(storage, computerService);
 
         InputRequest request = new InputRequest();
 

@@ -13,25 +13,25 @@ import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponseCode;
 import apis.computer.ComputerResponseImpl;
 import apis.computer.ComputerService;
-import apis.datastorage.DataStorageAPI;
+import apis.datastorage.DataStorageApi;
 import apis.datastorage.ReadRequest;
 import apis.datastorage.ReadResponseCode;
-import apis.datastorage.ReadResponseImplementation;
+import apis.datastorage.ReadResponseImpl;
 import apis.datastorage.WriteRequest;
 import apis.datastorage.WriteResponseCode;
-import apis.datastorage.WriteResponseImplementation;
+import apis.datastorage.WriteResponseImpl;
 import apis.userinput.InputRequest;
 
 public class JobHandlerUnitTest {
 
     private ComputerService computerService;
-    private DataStorageAPI dataStorageAPI;
+    private DataStorageApi dataStorageAPI;
     private JobHandler jobHandler;
 
     @BeforeEach
     void setUp() {
         computerService = Mockito.mock(ComputerService.class);
-        dataStorageAPI = Mockito.mock(DataStorageAPI.class);
+        dataStorageAPI = Mockito.mock(DataStorageApi.class);
         jobHandler = new JobHandler(computerService, dataStorageAPI);
     }
 
@@ -96,7 +96,7 @@ public class JobHandlerUnitTest {
 
         // simulate a failed storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(new ArrayList<>(), ReadResponseCode.FAILED));
+        .thenReturn(new ReadResponseImpl(new ArrayList<>(), ReadResponseCode.FAILED));
 
         InputRequest inputRequest = new InputRequest();
         String result = jobHandler.handleJob(inputRequest);
@@ -112,7 +112,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read with null data
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(null, ReadResponseCode.SUCCESS));
+        .thenReturn(new ReadResponseImpl(null, ReadResponseCode.SUCCESS));
 
         InputRequest inputRequest = new InputRequest();
         String result = jobHandler.handleJob(inputRequest);
@@ -128,7 +128,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(
+        .thenReturn(new ReadResponseImpl(
             new ArrayList<>(List.of(1, 2, 3)), ReadResponseCode.SUCCESS));
 
         // simulate a null computer response
@@ -149,7 +149,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(
+        .thenReturn(new ReadResponseImpl(
             new ArrayList<>(List.of(1, 2, 3)), ReadResponseCode.SUCCESS));
 
         // simulate a null computer response
@@ -170,7 +170,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(
+        .thenReturn(new ReadResponseImpl(
             new ArrayList<>(List.of(1, 2, 3)), ReadResponseCode.SUCCESS));
 
         // simulate a computer response
@@ -194,7 +194,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(
+        .thenReturn(new ReadResponseImpl(
             new ArrayList<>(List.of(1, 2, 3)), ReadResponseCode.SUCCESS));
 
         // simulate a computer response
@@ -203,7 +203,7 @@ public class JobHandlerUnitTest {
 
         // simulate a failed storage write
         Mockito.when(dataStorageAPI.write(Mockito.any(WriteRequest.class)))
-        .thenReturn(new WriteResponseImplementation(WriteResponseCode.FAILED));
+        .thenReturn(new WriteResponseImpl(WriteResponseCode.FAILED));
 
         String result = jobHandler.handleJob(new InputRequest());
 
@@ -220,7 +220,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage read
         Mockito.when(dataStorageAPI.read(Mockito.any(ReadRequest.class)))
-        .thenReturn(new ReadResponseImplementation(
+        .thenReturn(new ReadResponseImpl(
             new ArrayList<>(List.of(1, 2, 3)), ReadResponseCode.SUCCESS));
 
         // simulate a computer response
@@ -229,7 +229,7 @@ public class JobHandlerUnitTest {
 
         // simulate a successful storage write
         Mockito.when(dataStorageAPI.write(Mockito.any(WriteRequest.class)))
-        .thenReturn(new WriteResponseImplementation(WriteResponseCode.SUCCESS));
+        .thenReturn(new WriteResponseImpl(WriteResponseCode.SUCCESS));
 
         String result = jobHandler.handleJob(new InputRequest());
 
