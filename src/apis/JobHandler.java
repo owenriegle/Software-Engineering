@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import apis.computer.ComputerRequest;
 import apis.computer.ComputerResponse;
+import apis.computer.ComputerResponseCode;
 import apis.computer.ComputerService;
 import apis.datastorage.DataStorageApi;
 import apis.datastorage.ReadRequest;
@@ -62,7 +63,9 @@ public class JobHandler {
             // pass the data to the compute engine for processing
             ComputerResponse computerResponse = computerService.compute(computerRequest);
             // if computerResponse null or data is null, return compute failure
-            if (computerResponse == null || computerResponse.getResults() == null) {
+            if (computerResponse == null
+                    || computerResponse.getResults() == null
+                    || computerResponse.getResponseCode() != ComputerResponseCode.SUCCESS) {
                 return COMPUTE_FAILURE_MESSAGE;
             }
 
