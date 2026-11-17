@@ -1,11 +1,13 @@
 package apis.userinput;
 
+import java.util.Objects;
+
 public class InputResponseImpl implements InputResponse {
 
-    private String statusMessage;
+    private final String statusMessage;
 
     public InputResponseImpl(String statusMessage) {
-        this.statusMessage = statusMessage;
+        this.statusMessage = Objects.requireNonNull(statusMessage);
     }
 
     @Override

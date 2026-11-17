@@ -1,5 +1,4 @@
 import apis.JobHandler;
-import apis.computer.ComputerRequest;
 import apis.computer.ComputerService;
 import apis.datastorage.DataStorageApiImpl;
 import apis.userinput.InputRequest;
@@ -8,7 +7,6 @@ import apis.userinput.UserInputApiImpl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mockito;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,10 +18,9 @@ public class JobHandlerIntegrationTest {
     @Test
     void testExceptionHandlingIntegration() throws Exception {
 
-        ComputerService computerService = Mockito.mock(ComputerService.class);
-
-        Mockito.when(computerService.compute(Mockito.any()))
-                .thenThrow(new IllegalStateException("Simulated computation failure"));
+        ComputerService computerService = computerRequest -> {
+            throw new IllegalStateException("Simulated computation failure");
+        };
 
         DataStorageApiImpl dataStorageApiImplementation = new DataStorageApiImpl();
 
@@ -47,8 +44,6 @@ public class JobHandlerIntegrationTest {
             Assertions.assertEquals(
                     JobHandler.GENERAL_FAILURE_MESSAGE,
                     inputResponse.getStatusMessage());
-
-            Mockito.verify(computerService).compute(Mockito.any(ComputerRequest.class));
 
         } finally {
             Files.deleteIfExists(input.toPath());

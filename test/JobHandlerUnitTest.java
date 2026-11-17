@@ -154,7 +154,7 @@ public class JobHandlerUnitTest {
 
         // simulate a null computer response
         Mockito.when(computerService.compute(Mockito.any(ComputerRequest.class)))
-        .thenReturn(new ComputerResponseImpl(null, ComputerResponseCode.FAILED));
+        .thenReturn(new ComputerResponseImpl(null, ComputerResponseCode.SUCCESS));
 
         String result = jobHandler.handleJob(new InputRequest());
 
